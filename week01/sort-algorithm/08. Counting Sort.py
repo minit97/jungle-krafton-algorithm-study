@@ -11,18 +11,16 @@ def counting_sort(arr):
     # 각 요소의 등장 횟수 카운트
     for num in arr:
         count[num - min_value] += 1
-
-    # 누적 합산
+    # 누적 합산 - 이전 요소가 몇 개 있나
     for i in range(1, len(count)):
         count[i] += count[i - 1]
-
     # 정렬된 배열을 담을 임시 배열 초기화
     sorted_arr = [0] * len(arr)
 
     # 입력 배열을 순회하며 정렬된 위치에 요소 삽입
     for num in reversed(arr):
         sorted_arr[count[num - min_value] - 1] = num
-        count[num - min_value] -= 1
+        count[num - min_value] -= 1 # 그 전 요소로 가야함
 
     return sorted_arr
 

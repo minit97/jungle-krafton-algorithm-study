@@ -11,16 +11,18 @@ def merge_sort_simple(_arr):
     high_arr = merge_sort_simple(_arr[mid:])
 
     merged_arr = []
-    l = h = 0
-    while l < len(low_arr) and h < len(high_arr):
-        if low_arr[l] < high_arr[h]:
-            merged_arr.append(low_arr[l])
-            l += 1
+    low = high = 0
+    while low < len(low_arr) and high < len(high_arr):
+        if low_arr[low] < high_arr[high]:
+            merged_arr.append(low_arr[low])
+            low += 1
         else:
-            merged_arr.append(high_arr[h])
-            h += 1
-    merged_arr += low_arr[l:]
-    merged_arr += high_arr[h:]
+            merged_arr.append(high_arr[high])
+            high += 1
+    # 한쪽에서 다 빠질 경우의 수 고려
+
+    merged_arr += low_arr[low:]
+    merged_arr += high_arr[high:]
     return merged_arr
 
 def merge_sort(_arr):
@@ -34,22 +36,22 @@ def merge_sort(_arr):
 
     def merge(low, mid, high):
         temp = []
-        l, h = low, high
+        temp_low, temp_high = low, high
 
-        while l < mid and h < high:
-            if _arr[l] < _arr[h]:
-                temp.append(_arr[l])
-                l += 1
+        while temp_low < mid and temp_high < high:
+            if _arr[temp_low] < _arr[temp_high]:
+                temp.append(_arr[temp_low])
+                temp_low += 1
             else:
-                temp.append(_arr[h])
-                h += 1
+                temp.append(_arr[temp_high])
+                temp_high += 1
 
-        while l < mid:
-            temp.append(_arr[l])
-            l += 1
-        while h < high:
-            temp.append(_arr[h])
-            h += 1
+        while temp_low < mid:
+            temp.append(_arr[temp_low])
+            temp_low += 1
+        while temp_high < high:
+            temp.append(_arr[temp_high])
+            temp_high += 1
 
         for i in range(low, high):
             _arr[i] = temp[i - low]
