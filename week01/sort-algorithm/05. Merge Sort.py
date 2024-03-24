@@ -36,7 +36,7 @@ def merge_sort(_arr):
 
     def merge(low, mid, high):
         temp = []
-        temp_low, temp_high = low, high
+        temp_low, temp_high = low, mid
 
         while temp_low < mid and temp_high < high:
             if _arr[temp_low] < _arr[temp_high]:
