@@ -4,11 +4,7 @@ def input():
     return sys.stdin.readline().rstrip()
 
 n = int(input())
-
-_square = []
-for _ in range(n):
-    _list = list(map(int, input().split()))
-    _square.append(_list)
+_square = [list(map(int, input().split())) for _ in range(n)]
 
 white_cnt = 0
 blue_cnt = 0
