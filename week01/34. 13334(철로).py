@@ -1,5 +1,5 @@
 # 다시 풀기!
-# 상 : 우선순위 큐
+# 상 : 우선순위 큐 + 완탐?
 import sys
 import heapq
 
@@ -19,7 +19,7 @@ railway_len = int(input())
 heap = []
 max_cnt = 0
 
-for location in location_list:
+for location in location_list:  # 모든 선을 하나씩 다 비교하는 거잖아
     start, end = location
     heapq.heappush(heap, start)
     line_start = end - railway_len

@@ -35,4 +35,4 @@ for i in range(len(data)):
         stack.pop()
         temp //= 3
 
-print(0) if stack else print(result)
+print(0 if stack else result)

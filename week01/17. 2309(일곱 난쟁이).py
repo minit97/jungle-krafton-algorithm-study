@@ -2,24 +2,22 @@ import sys
 def input():
     return sys.stdin.readline().rstrip()
 
-_data = []
-for _ in range(9):
-    _data.append(int(input()))
-_data.sort()
+data = [int(input()) for _ in range(9)]
+data.sort()
 
-sum_value = sum(_data)
-for i in _data:
+sum_value = sum(data)
+for i in data:
     roop_out = False
-    for j in _data:
+    for j in data:
         if sum_value - i - j == 100 and i != j:
-            _data.remove(i)
-            _data.remove(j)
+            data.remove(i)
+            data.remove(j)
             roop_out = True
             break
     if roop_out:
         break
 
-for result in _data:
+for result in data:
     print(result)
 
 

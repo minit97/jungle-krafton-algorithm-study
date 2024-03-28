@@ -5,9 +5,7 @@ def input():
 
 t = int(input())
 
-result = []
-for _ in range(t):
-    result.append(input())
+result = [input() for _ in range(t)]
 result = list(set(result))
 result.sort(key=lambda x: (len(x), x))
 

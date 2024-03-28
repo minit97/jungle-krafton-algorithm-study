@@ -53,7 +53,7 @@ def bfs_sink(x, y, h):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if (0 <= nx < n) and (0 <= ny < n) and _sink[nx][ny] == 0 and _local[nx][ny] > h:
+            if (0 <= nx < n) and (0 <= ny < n) and visited[nx][ny] == 0 and _local[nx][ny] > h:
                 queue.append((nx, ny))
                 visited[nx][ny] = 1
 

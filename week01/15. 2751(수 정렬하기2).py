@@ -1,8 +1,6 @@
 t = int(input())
 
-result = []
-for _ in range(t):
-    result.append(int(input()))
+result = [int(input()) for _ in range(t)]
 result.sort()
 
 for i in result:

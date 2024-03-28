@@ -1,5 +1,5 @@
 # 다시 풀기!
-# 중
+# 중 : 스택
 
 import sys
 def input():
