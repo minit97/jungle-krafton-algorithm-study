@@ -1,42 +1,41 @@
-import heapq as hq
+# 프림은 다익스트라와 매우 유사하다.
 
-def prim(start):
-    heap = list()
-    # 연결되어 있는지 확인하는 리스트
-    connected = [False] * (NODE_CNT + 1)
+import heapq
 
-    sum_w = 0
+def prim(start, visited):
+    visited[start] = True
 
-    hq.heappush(heap, (0, start))
-    sum_w = 0
+    min_heap = []
+    for next_node, weight in graph[start]:
+        min_heap.append((weight, next_node))
 
-    print('#####################')
-    print('Minimum Spanning Tree')
+    heapq.heapify(min_heap)
+    result = 0
+    while min_heap:
+        weight, to_node = heapq.heappop(min_heap)
+        if not visited[to_node]:
+            visited[to_node] = True
+            result += weight
+            for next_node, next_weight in graph[to_node]:
+                if not visited[next_node]:
+                    heapq.heappush(min_heap, (next_weight, next_node))
 
-    # 우선순위 큐에 데이터가 있는 동안
-    while heap:
-        weight, v = hq.heappop(heap)
-        # 뺀 노드가 그래프에 포함되어 있지 않은 경우
-        if not connected[v]:
-            # 그래프에 포함 처리
-            connected[v] = True
-            sum_w += weight
-            print('Connected Nodes:', v, 'Weight:', weight)
-            for i in range(1, NODE_CNT + 1):
-                if graph[v][i] != 0 and not connected[i]:
-                    hq.heappush(heap, (graph[v][i], i))
+    return result
 
-    print('Sum of weight:', sum_w)
-    print('#####################')
 
-if __name__ == "__main__":
-    NODE_CNT = 5
-    graph = [[0] * (NODE_CNT + 1) for _ in range(NODE_CNT + 1)]
-    root = list(range(NODE_CNT + 1))
-    graph[1][2], graph[1][3], graph[1][4] = 1, 8, 3
-    graph[2][1], graph[2][4], graph[2][5] = 1, 2, 7
-    graph[3][1], graph[3][4], graph[3][5] = 8, 4, 5
-    graph[4][1], graph[4][2], graph[4][3], graph[4][5] = 3, 2, 4, 6
-    graph[5][2], graph[5][3], graph[5][4] = 7, 5, 6
 
-    prim(1)
+# 예시 그래프
+graph = {
+    'A': [('B', 5), ('C', 3)],
+    'B': [('A', 5), ('C', 1), ('D', 2)],
+    'C': [('A', 3), ('B', 1), ('D', 4), ('E', 6)],
+    'D': [('B', 2), ('C', 4), ('E', 7)],
+    'E': [('C', 6), ('D', 7)]
+}
+# n은 노드의 갯수
+n = int(input())
+visited = [False] * (n + 1)
+start = 0
+
+result = prim(start, visited)
+print("Minimum Spanning Tree:", result)
