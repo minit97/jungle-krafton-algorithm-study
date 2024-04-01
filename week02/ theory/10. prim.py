@@ -2,7 +2,7 @@
 
 import heapq
 
-def prim(start, visited):
+def prim(graph, start, visited):
     visited[start] = True
 
     min_heap = []
