@@ -5,51 +5,43 @@ import sys
 def input():
     return sys.stdin.readline().rstrip()
 
-# ======================== dfs ========================
-sys.setrecursionlimit(5000)
-def dfs(start, depth):
-    #해당 노드 방문체크 한다.
-    visited[start] = True
-
-    # 해당 시작점을 기준으로 계속해서 dfs로 그래프를탐색한다.
-    for i in graph[start]:
+# ======================== dfs 방식 ========================
+sys.setrecursionlimit(10 ** 6)
+def dfs(graph, v, visited):
+    visited[v] = True
+    for i in graph[v]:
         if not visited[i]:
-            dfs(i, depth + 1)
-# ======================== bfs ========================
+            dfs(graph, i, visited)
+
+# ======================== bfs 방식 ========================
 from collections import deque
 
-def bfs(start):
-    queue = deque([start])
+def bfs(graph, start, visited):
     visited[start] = True
+    queue = deque([start])
     while queue:
-        node = queue.popleft()
-        for i in graph[node]:
+        now = queue.popleft()
+        for i in graph[now]:
             if not visited[i]:
                 visited[i] = True
                 queue.append(i)
 
+# ======================== 입력 시작!!! ========================
+# 정점의 수, 간선의 수
+n, m = map(int, input().split())
+graph = [[] for _ in range(n + 1)]
 
-
-N, M = map(int, input().split())
-graph = [[] for _ in range(N + 1)]
-
-for _ in range(M):
+for _ in range(m):
     a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-# 방문처리
-visited = [False] * (1 + N)
-count = 0  # 컴포넌트 그래프 개수 저장
+visited = [False] * (n + 1)
+result = 0
 
-# 1~N번 노드를 각각돌면서
-for i in range(1, N + 1):
-    if not visited[i]:  # 만약 i번째 노드를 방문하지 않았다면
-        if not graph[i]:  # 만약 해당 정점이 연결된 그래프가 없다면
-            count += 1  # 개수를 + 1
-            visited[i] = True  # 방문 처리
-        else:  # 연결된 그래프가 있다면
-            dfs(i, 0)  # dfs탐색을 돈다.
-            count += 1  # 개수를 +1
+for i in range(1, n + 1):
+    if not visited[i]:
+        dfs(graph, i, visited)
+        result += 1
 
-print(count)
+print(result)
