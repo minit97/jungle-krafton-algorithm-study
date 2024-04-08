@@ -4,13 +4,9 @@ def input():
     return sys.stdin.readline().rstrip()
 
 n = int(input())
-data = []
-for _ in range(n):
-    temp_list = [int(char) for char in str(input())]
-    data.append(temp_list)
+data = [list(map(int, input())) for _ in range(n)]
 
 result = ''
-
 def one_color_check(x, y, size):
     global result
 
