@@ -1,3 +1,5 @@
+# 문제 이해를 다시 한번 해보자!!
+
 n = int(input())
 k = int(input())
 
